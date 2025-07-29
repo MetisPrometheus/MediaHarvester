@@ -1,0 +1,31 @@
+{
+  "name": "memeyoink",
+  "version": "1.0.0",
+  "description": "Quick meme downloader for YouTube, Instagram, and TikTok",
+  "scripts": {
+    "dev": "npm run dev:vercel",
+    "dev:vercel": "vercel dev",
+    "dev:local": "concurrently \"npm run server:python\" \"npm run client:dev\"",
+    "server:python": "python local-server.py",
+    "client:dev": "cd frontend && npm start",
+    "build": "cd frontend && npm install && npm run build",
+    "start": "npm run dev",
+    "deploy": "vercel --prod",
+    "deploy:preview": "vercel",
+    "install:all": "npm install && cd frontend && npm install",
+    "install:python": "pip install -r requirements.txt"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  },
+  "keywords": [
+    "video",
+    "downloader",
+    "meme",
+    "youtube",
+    "tiktok",
+    "instagram"
+  ],
+  "author": "",
+  "license": "MIT"
+}

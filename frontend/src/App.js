@@ -6,6 +6,7 @@ function App() {
   const [platform, setPlatform] = useState("youtube");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
 
   const download = async () => {
     if (!url.trim()) {
@@ -15,6 +16,7 @@ function App() {
 
     setLoading(true);
     setError("");
+    setSuccess(false);
 
     try {
       const response = await fetch("/api/download", {
@@ -39,6 +41,8 @@ function App() {
       window.URL.revokeObjectURL(downloadUrl);
 
       setUrl("");
+      setSuccess(true);
+      setTimeout(() => setSuccess(false), 3000);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -49,7 +53,7 @@ function App() {
   return (
     <div className="app-container">
       <div className="content">
-        <h1>⚡ Quick Video Downloader</h1>
+        <h1>⚡Quick Meme Yoinker</h1>
         <p className="subtitle">
           Download videos from YouTube Shorts, Instagram Reels & TikTok
         </p>
@@ -91,6 +95,7 @@ function App() {
             <li>Make sure the URL is publicly accessible</li>
             <li>Instagram may require authentication for some videos</li>
             <li>Downloads may take a few seconds</li>
+            <li>Max file size: 50MB</li>
           </ul>
         </div>
       </div>
