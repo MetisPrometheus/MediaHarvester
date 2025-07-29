@@ -1,19 +1,19 @@
 {
-  "buildCommand": "cd frontend && npm install && CI=false npm run build",
-  "outputDirectory": "frontend/build",
-  "functions": {
-    "api/download.py": {
-      "maxDuration": 30
-    }
-  },
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
+      "src": "api/download.py",
+      "use": "@vercel/python"
     },
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "package.json",
+      "use": "@vercel/static-build"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/download",
+      "dest": "api/download.py"
     }
   ]
 }
