@@ -26,8 +26,19 @@ function App() {
       });
 
       if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error || "Download failed");
+        let errorMessage = "Download failed";
+        try {
+          const contentType = response.headers.get("content-type");
+          if (contentType && contentType.includes("application/json")) {
+            const data = await response.json();
+            errorMessage = data.error || errorMessage;
+          } else {
+            errorMessage = `Server error (${response.status})`;
+          }
+        } catch (e) {
+          errorMessage = `Server error (${response.status})`;
+        }
+        throw new Error(errorMessage);
       }
 
       const blob = await response.blob();
