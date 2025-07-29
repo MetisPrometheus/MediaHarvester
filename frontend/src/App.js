@@ -88,6 +88,9 @@ function App() {
         </div>
 
         {error && <div className="error">{error}</div>}
+        {success && (
+          <div className="success">✅ Meme successfully yoinked!</div>
+        )}
 
         <div className="tips">
           <p>💡 Tips:</p>
